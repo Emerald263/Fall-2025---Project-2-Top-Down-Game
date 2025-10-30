@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class BattleDialogueBox : MonoBehaviour
 {
     [SerializeField] int lettersPerSecond;
+    [SerializeField] Color highlightedColor;
+    
+
     [SerializeField] Text dialogueText;
     [SerializeField] GameObject actionselector;
     [SerializeField] GameObject moveselector;
@@ -51,7 +54,33 @@ public class BattleDialogueBox : MonoBehaviour
         movedetails.SetActive(enabled);
     }
 
+    public void UpdateActionSelection(int selectedAction)
+    {
+        for (int i = 0; i < actionTexts.Count; i++) 
+        {
+            if (i == selectedAction)
+                actionTexts[i].color = highlightedColor;
 
+            else
+                actionTexts[i].color = Color.black;
+        }
+        
+    }
+
+    public void SetMoveName(List<Move> moves)
+    {
+        for(int i = 0; i < moves.Count; ++i)
+        {
+
+            if (i < moves.Count)
+                moveTexts[i].text = moves[i].Base.Name;
+            else
+                moveTexts[i].text = "-";
+
+        }
+
+
+    }
 }
 
 

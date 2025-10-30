@@ -151,32 +151,63 @@ public class BattleManager : MonoBehaviour
 
         }
 
-        void HandleActionSelection()
+    }
+    void HandleActionSelection()
+    {
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            if (CurrentActionBattle < 1)
+                ++CurrentActionBattle;
+        }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                if (CurrentActionBattle < 1)
-                    ++CurrentActionBattle;
-            }
-
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                if (CurrentActionBattle > 0)
-                    --CurrentActionBattle;
-
-            }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (CurrentActionBattle > 0)
+                --CurrentActionBattle;
 
         }
+
+        dialogueBox.UpdateActionSelection(CurrentActionBattle);
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            if (CurrentActionBattle == 0)
+            {
+
+                //Fight
+                FrostAction();
+            }
+
+            if (CurrentActionBattle == 1)
+            {
+
+                //Run
+                BattleFlee();
+            }
+
+
+
+        }
+
     }
+
+        
+    
 
    void FrostAction()
     {
         Debug.Log("Frost Action");
+        state = Battlestates.PlayerActionFrost;
+        dialogueBox.EnableActionSelector(false);
+        dialogueBox.EnableDialogueText(false);
+        dialogueBox.EnableMoveSelector(true);
 
 
     }
-         
+
     void HollowAction()
         {
             Debug.Log("Hollow Action");
@@ -198,7 +229,7 @@ public class BattleManager : MonoBehaviour
     public IEnumerator SetupBattle()
     {
 
- 
+
         yield return StartCoroutine (dialogueBox.TypeDialogue($"Wild Tree Crawlers appeared"));
         yield return new WaitForSeconds (1f);
 
