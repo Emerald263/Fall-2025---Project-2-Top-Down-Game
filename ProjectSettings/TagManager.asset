@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Shop 1
+  - Shop 2
+  - Town
+  - Entry
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Background
+  - Water
+  - UI
+  - Foreground
+  - Player
+  - Topground
+  - Inventory
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 3565109747
+    locked: 0
+  - name: 2
+    uniqueID: 1538350555
+    locked: 0
+  - name: 3
+    uniqueID: 145443103
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 2267758155
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 925840711
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 667564287
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 1640068203
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 529539591
+    locked: 0
