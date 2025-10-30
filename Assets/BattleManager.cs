@@ -18,7 +18,9 @@ public class BattleManager : MonoBehaviour
         PlayerAction,
         PlayerActionFrost,
         PlayerActionHollow,
-        EnemyMove,
+        EnemyMove1,
+        EnemyMove2,
+        EnemyMove3,
         Busy,
 
     }
@@ -78,6 +80,7 @@ public class BattleManager : MonoBehaviour
     public float HollowSpellfinal;
 
     Battlestates state;
+    int CurrentActionBattle;
 
 
     // Start is called before the first frame update
@@ -138,43 +141,33 @@ public class BattleManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
-        if (FrostSP > HollowSP)
-        {
-            FrostAction();
-        }
-
-
-        if (HollowSP > FrostSP)
-        {
-            HollowAction();
-        }
-
-        if (eneSP > HollowSP)
-        {
-           
-        }
-
-        if (eneSP > FrostSP)
-        {
-            
-        }
-
-        if (Input.GetKeyDown("r"))
+        if (state == Battlestates.PlayerAction)
         {
 
-            StartCoroutine(BattleFlee());
-       
+            HandleActionSelection();
 
         }
 
-        if (EXP > 100)
+        void HandleActionSelection()
         {
-            Level++;
-        }
 
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (CurrentActionBattle < 1)
+                    ++CurrentActionBattle;
+            }
+
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (CurrentActionBattle > 0)
+                    --CurrentActionBattle;
+
+            }
+
+        }
     }
 
    void FrostAction()
@@ -185,21 +178,21 @@ public class BattleManager : MonoBehaviour
     }
          
     void HollowAction()
-    {
-        Debug.Log("Hollow Action");
-     
-
-        if (Input.GetKeyDown("e"))
         {
+            Debug.Log("Hollow Action");
 
-            eneHPFinal = eneHP - Hollowattckfinal;
-            Debug.Log("Hollow Attack");
-            HollowSPfinal = 5;
-            StartCoroutine(dialogueBox.TypeDialogue($"Hollow Attacked"));
+
+            if (Input.GetKeyDown("e"))
+            {
+
+                eneHPFinal = eneHP - Hollowattckfinal;
+                Debug.Log("Hollow Attack");
+                HollowSPfinal = 5;
+                StartCoroutine(dialogueBox.TypeDialogue($"Hollow Attacked"));
+
+            }
 
         }
-
-    }
 
     
     public IEnumerator SetupBattle()
@@ -218,6 +211,13 @@ public class BattleManager : MonoBehaviour
         state = Battlestates.PlayerAction;
         StartCoroutine(dialogueBox.TypeDialogue("Choose an action"));
         dialogueBox.EnableActionSelector(true);
+
+        if (Input.GetKeyDown("r"))
+        {
+
+            StartCoroutine(BattleFlee());
+
+        }
     }
 
     public IEnumerator BattleFlee()
@@ -231,4 +231,6 @@ public class BattleManager : MonoBehaviour
             GPfinal = GP + 15;
         }
     }
+
+ 
 }
