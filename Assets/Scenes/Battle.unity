@@ -1108,6 +1108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1277247106}
   - component: {fileID: 1277247105}
+  - component: {fileID: 1277247107}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -1127,6 +1128,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc96077caf1a6e949b3bc641b999f1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundEffects: {fileID: 0}
+  sounds: []
+  Frostidle: 0
+  Frostattck: 0
+  Hollowidle: 0
+  Hollowattck: 0
+  Enemyidle: 0
+  Enemyattck: 0
   dialogueBox: {fileID: 2140774390}
   State: 2
   armor: 0
@@ -1152,7 +1161,7 @@ MonoBehaviour:
   Battleorder: 0
   Lvlattack: 0
   FrostSP: 0
-  Frostattck: 0
+  Frostattckst: 0
   FrostDef: 0
   FrostHP: 0
   FrostEXP: 0
@@ -1163,7 +1172,7 @@ MonoBehaviour:
   FrostHPfinal: 0
   FrostSpellfinal: 0
   HollowSP: 0
-  Hollowattck: 0
+  Hollowattckst: 0
   HollowDef: 0
   HollowHP: 0
   HollowEXP: 0
@@ -1188,6 +1197,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1277247107
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277247104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b860051d3132ac94eb4be172d2674094, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1343955161
 GameObject:
   m_ObjectHideFlags: 0
