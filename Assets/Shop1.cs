@@ -22,8 +22,10 @@ public class Shop1 : MonoBehaviour
         dialogueBox.EnableDialogueText(true);
         dialogueBox.EnableActionSelectorShop(true);
 
+        StartCoroutine(SetupShop());
 
 
+        
 
 
     }
@@ -65,7 +67,7 @@ public class Shop1 : MonoBehaviour
 
         }
 
-        dialogueBox.UpdateActionSelection(Shopaction);
+        dialogueBox.UpdateShopSelection(Shopaction);
 
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -87,6 +89,17 @@ public class Shop1 : MonoBehaviour
 
         }
 
+
+    }
+
+    public IEnumerator SetupShop()
+    {
+
+
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Wild Tree Crawlers appeared"));
+        yield return new WaitForSeconds(1f);
+
+        HandleShopSelection();
     }
 
 }

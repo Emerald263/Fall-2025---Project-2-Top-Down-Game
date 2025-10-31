@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopDialogueBox : MonoBehaviour
 {
@@ -48,17 +49,15 @@ public class ShopDialogueBox : MonoBehaviour
         actionselectorshop.SetActive(enabled);
     }
 
-
-
-    public void UpdateActionSelection(int selectedshop)
+    public void UpdateShopSelection(int Shopactionselect)
     {
-        for (int i = 0; i < Shopaction.Count; i++)
+        for (int i = 0; i < ShopTexts.Count; i++)
         {
-            if (i == selectedAction)
-                Shopaction[i].color = highlightedColor;
+            if (i == Shopactionselect)
+                ShopTexts[i].color = highlightedColor;
 
             else
-               Shopaction[i].color = Color.black;
+                ShopTexts[i].color = Color.black;
         }
 
     }

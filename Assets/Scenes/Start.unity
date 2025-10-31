@@ -160,6 +160,8 @@ MonoBehaviour:
   speed: 0.05
   sprint: 0.001
   hasKey: 0
+  soundEffects: {fileID: 0}
+  sounds: []
   upSprite: {fileID: 21300000, guid: ed9178f22dcf9304aa90c77ec2164d7a, type: 3}
   leftSprite: {fileID: 21300000, guid: 82e86c55fcdab5e4e8eaadd72d96a35f, type: 3}
   rightSprite: {fileID: 21300000, guid: 33c0818eae5a77e46942664564db3b53, type: 3}
@@ -1644,8 +1646,8 @@ Transform:
   m_GameObject: {fileID: 365010299}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.3372, y: 7.19, z: 0}
-  m_LocalScale: {x: 28.863909, y: 4.5401354, z: 1}
+  m_LocalPosition: {x: 37.5135, y: 7.19, z: 0}
+  m_LocalScale: {x: 33.216587, y: 4.5401354, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2548,8 +2550,8 @@ Transform:
   m_GameObject: {fileID: 671284087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4, y: 11.6884, z: 0}
-  m_LocalScale: {x: 3.4016898, y: 3.4553857, z: 1}
+  m_LocalPosition: {x: 1.0483, y: 11.6884, z: 0}
+  m_LocalScale: {x: 3.5649707, y: 3.4553857, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3937,8 +3939,8 @@ Transform:
   m_GameObject: {fileID: 1267057721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.1, y: -10.4453, z: 0}
-  m_LocalScale: {x: 0.7643848, y: 1.1976931, z: 1}
+  m_LocalPosition: {x: 40.4803, y: -10.4453, z: 0}
+  m_LocalScale: {x: 0.9229946, y: 1.1976931, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
