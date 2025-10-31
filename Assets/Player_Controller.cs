@@ -21,6 +21,10 @@ public class Player_Controller : MonoBehaviour
     private SpriteRenderer sr;
     public bool hasKey = false;
 
+    //audio variables
+    public AudioSource soundEffects;
+    public AudioClip[] sounds; // Public variable to access the Audio Source component
+
     //sprite variables
     public Sprite upSprite;
     public Sprite leftSprite;
@@ -86,7 +90,8 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        soundEffects = GetComponent<AudioSource>();
         State = Playerstates.Overworld;
         inventory.SetActive(false);
         inventimer = 2;

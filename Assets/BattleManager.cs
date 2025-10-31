@@ -9,6 +9,19 @@ using static Player_Controller;
 public class BattleManager : MonoBehaviour
 {
 
+    //audio variables
+    public AudioSource soundEffects;
+    public AudioClip[] sounds; // Public variable to access the Audio Source component
+
+    //Animation variables
+    Animator anim;
+    public bool Frostidle;
+    public bool Frostattck;
+    public bool Hollowidle;
+    public float Hollowattck;
+    public float Enemyidle;
+    public float Enemyattck;
+
     [SerializeField] BattleDialogueBox dialogueBox;
 
 
@@ -53,7 +66,7 @@ public class BattleManager : MonoBehaviour
 
     //Frost stats
     public float FrostSP;
-    public float Frostattck;
+    public float Frostattckst;
     public float FrostDef;
     public float FrostHP;
     public float FrostEXP;
@@ -66,7 +79,7 @@ public class BattleManager : MonoBehaviour
 
     //Hollow stats
     public float HollowSP;
-    public float Hollowattck;
+    public float Hollowattckst;
     public float HollowDef;
     public float HollowHP;
     public float HollowEXP;
@@ -86,6 +99,9 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+
+        soundEffects = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
 
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableMoveSelectorFrost(false);
@@ -118,8 +134,8 @@ public class BattleManager : MonoBehaviour
         HollowSPfinal = HollowSP + SP;
         FrostSPfinal = FrostSP + SP;
 
-        Hollowattckfinal = Hollowattck + attack;
-        Frostattckfinal = Frostattck + attack;
+        Hollowattckfinal = Hollowattckst + attack;
+        Frostattckfinal = Frostattckst + attack;
 
         HollowDeffinal = HollowDef + armor;
         FrostDeffinal = FrostDef + armor;
@@ -165,6 +181,9 @@ public class BattleManager : MonoBehaviour
 
             eneHP = -1;
         }
+
+        anim.SetBool("Frostattck", Frostattck);
+        anim.SetBool("Frostidl", Frostidle);
 
     }
     void HandleActionSelection()
@@ -220,6 +239,7 @@ public class BattleManager : MonoBehaviour
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelectorFrost(true);
         HandleMoveSelectionFrost();
+        Frostidle = true;
 
     }
 
@@ -278,6 +298,8 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Attacked"));
         yield return new WaitForSeconds(5f);
         {
+            Frostidle = false;
+            Frostattck = true;
             --eneHP;
 
             if (eneHP < 1)
@@ -297,6 +319,8 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Casted Ice Shard"));
         yield return new WaitForSeconds(5f);
         {
+            Frostidle = false;
+            Frostattck = true;
             --eneHP;
 
             if (eneHP < 1)
@@ -402,12 +426,15 @@ public class BattleManager : MonoBehaviour
 
     void HollowAction()
         {
+        Frostidle = false;
+        Frostattck = false;
         Debug.Log("Hollow Action");
         state = Battlestates.PlayerActionHollow;
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelectorHollow(true);
         HandleMoveSelectionHollow();
+        Hollowidle = true;
 
         if (eneHP < 0)
         {
@@ -484,6 +511,21 @@ public class BattleManager : MonoBehaviour
     public IEnumerator BattleEndWin()
     {
         yield return StartCoroutine(dialogueBox.TypeDialogue($"You Won! Gained 50exp and 15gp!"));
+        yield return new WaitForSeconds(1f);
+        {
+            //yield return new WaitForSeconds(1);
+            SceneManager.LoadScene(0);
+            State = Playerstates.Overworld;
+            EXPfinal = EXP + 50;
+            GPfinal = GP + 15;
+        }
+
+
+    }
+
+    public IEnumerator BattleEndLose()
+    {
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"You Lost"));
         yield return new WaitForSeconds(1f);
         {
             //yield return new WaitForSeconds(1);
