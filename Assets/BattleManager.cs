@@ -81,14 +81,17 @@ public class BattleManager : MonoBehaviour
 
     Battlestates state;
     int CurrentActionBattle;
+    int CurrentMoveFrost;
+    int CurrentMoveHollow;
 
 
     // Start is called before the first frame update
-   private void Start()
+    private void Start()
     {
 
         dialogueBox.EnableActionSelector(false);
-        dialogueBox.EnableMoveSelector(false);
+        dialogueBox.EnableMoveSelectorFrost(false);
+        dialogueBox.EnableMoveSelectorHollow(false);
         SetupBattle();
 
 
@@ -150,6 +153,18 @@ public class BattleManager : MonoBehaviour
             HandleActionSelection();
 
         }
+        else if(state == Battlestates.PlayerActionFrost)
+        { 
+            
+            FrostAction(); 
+        
+        }
+        else if(state == Battlestates.PlayerActionHollow)
+        {
+
+            HollowAction();
+
+        }
 
     }
     void HandleActionSelection()
@@ -185,7 +200,7 @@ public class BattleManager : MonoBehaviour
             {
 
                 //Run
-                BattleFlee();
+                StartCoroutine(BattleFlee());
             }
 
 
@@ -203,27 +218,108 @@ public class BattleManager : MonoBehaviour
         state = Battlestates.PlayerActionFrost;
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
-        dialogueBox.EnableMoveSelector(true);
+        dialogueBox.EnableMoveSelectorFrost(true);
+        HandleMoveSelectionFrost();
 
+
+    }
+
+    void HandleMoveSelectionFrost()
+    {
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (CurrentMoveFrost < 1)
+                ++CurrentMoveFrost;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (CurrentMoveFrost > 0)
+                --CurrentMoveFrost;
+
+        }
+
+        dialogueBox.UpdateMoveSelectionFrost(CurrentMoveFrost);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (CurrentMoveFrost == 0)
+            {
+                Debug.Log("Frost Attacked");
+                dialogueBox.EnableDialogueText(true);
+                dialogueBox.EnableMoveSelectorFrost(false);
+                state = Battlestates.Busy;
+                FrostAttack();
+       
+
+            }
+
+            if (CurrentMoveFrost == 1)
+            {
+
+                Debug.Log("Frost Casted Ice Shard");
+                dialogueBox.EnableDialogueText(true);
+                dialogueBox.EnableMoveSelectorFrost(false);
+                state = Battlestates.Busy;
+                FrostSpecial();
+
+            }
+
+
+
+        }
+
+    }
+
+    public IEnumerator FrostAttack()
+    {
+
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Attacked"));
+        {
+            //yield return new WaitForSeconds(3f);
+            HollowAction();
+        }
+    }
+
+    public IEnumerator FrostSpecial()
+    {
+
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Casted Ice Shard"));
+        {
+            //yield return new WaitForSeconds(3f);
+            HollowAction();
+        }
+    }
+
+    void HandleMoveSelectionHollow()
+    {
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (CurrentMoveHollow < 1)
+                ++CurrentMoveHollow;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (CurrentMoveHollow > 0)
+                --CurrentMoveHollow;
+
+        }
 
     }
 
     void HollowAction()
         {
-            Debug.Log("Hollow Action");
-
-
-            if (Input.GetKeyDown("e"))
-            {
-
-                eneHPFinal = eneHP - Hollowattckfinal;
-                Debug.Log("Hollow Attack");
-                HollowSPfinal = 5;
-                StartCoroutine(dialogueBox.TypeDialogue($"Hollow Attacked"));
-
-            }
-
-        }
+        Debug.Log("Hollow Action");
+        state = Battlestates.PlayerActionHollow;
+        dialogueBox.EnableActionSelector(false);
+        dialogueBox.EnableDialogueText(false);
+        dialogueBox.EnableMoveSelectorHollow(true);
+        HandleMoveSelectionHollow();
+    }
 
     
     public IEnumerator SetupBattle()
@@ -242,13 +338,6 @@ public class BattleManager : MonoBehaviour
         state = Battlestates.PlayerAction;
         StartCoroutine(dialogueBox.TypeDialogue("Choose an action"));
         dialogueBox.EnableActionSelector(true);
-
-        if (Input.GetKeyDown("r"))
-        {
-
-            StartCoroutine(BattleFlee());
-
-        }
     }
 
     public IEnumerator BattleFlee()

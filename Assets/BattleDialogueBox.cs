@@ -11,13 +11,17 @@ public class BattleDialogueBox : MonoBehaviour
 
     [SerializeField] Text dialogueText;
     [SerializeField] GameObject actionselector;
-    [SerializeField] GameObject moveselector;
-    [SerializeField] GameObject movedetails;
+    [SerializeField] GameObject moveselectorFrost;
+    [SerializeField] GameObject moveselectorHollow;
+    [SerializeField] GameObject movedetailsFrost;
+    [SerializeField] GameObject movedetailsHollow;
 
     [SerializeField] List<Text> actionTexts;
     [SerializeField] List<Text> moveTexts;
+    [SerializeField] List<Text> moves;
 
-    [SerializeField] Text description;
+    [SerializeField] Text descriptionF;
+    [SerializeField] Text descriptionH;
 
     public void SetDialogue(string dialogue)
     {
@@ -48,10 +52,16 @@ public class BattleDialogueBox : MonoBehaviour
         actionselector.SetActive(enabled);
     }
 
-    public void EnableMoveSelector(bool enabled)
+    public void EnableMoveSelectorFrost(bool enabled)
     {
-        moveselector.SetActive(enabled);
-        movedetails.SetActive(enabled);
+        moveselectorFrost.SetActive(enabled);
+        movedetailsFrost.SetActive(enabled);
+    }
+
+    public void EnableMoveSelectorHollow(bool enabled)
+    {
+        moveselectorHollow.SetActive(enabled);
+        movedetailsHollow.SetActive(enabled);
     }
 
     public void UpdateActionSelection(int selectedAction)
@@ -67,13 +77,39 @@ public class BattleDialogueBox : MonoBehaviour
         
     }
 
-    public void SetMoveName(List<Move> moves)
+    public void UpdateMoveSelectionFrost(int CurrentMoveFrost)
+    {
+        for (int i = 0; i < moveTexts.Count; i++)
+        {
+            if (i == CurrentMoveFrost)
+                moveTexts[i].color = highlightedColor;
+
+            else
+                moveTexts[i].color = Color.black;
+        }
+
+    }
+
+    public void UpdateMoveSelectionHollow(int CurrentMoveHollow)
+    {
+        for (int i = 0; i < moveTexts.Count; i++)
+        {
+            if (i == CurrentMoveHollow)
+                moveTexts[i].color = highlightedColor;
+
+            else
+                moveTexts[i].color = Color.black;
+        }
+
+    }
+
+    public void SetMoveName()
     {
         for(int i = 0; i < moves.Count; ++i)
         {
 
             if (i < moves.Count)
-                moveTexts[i].text = moves[i].Base.Name;
+                moveTexts[i].text = "-";
             else
                 moveTexts[i].text = "-";
 
