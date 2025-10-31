@@ -97,7 +97,7 @@ public class Shop1 : MonoBehaviour
     {
 
 
-        yield return StartCoroutine(dialogueBox.TypeDialogue($"Wild Tree Crawlers appeared"));
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Entered Shop"));
         yield return new WaitForSeconds(1f);
 
         HandleShopSelection();

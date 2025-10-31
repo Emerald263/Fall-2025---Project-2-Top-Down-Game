@@ -108,6 +108,9 @@ public class BattleManager : MonoBehaviour
         dialogueBox.EnableMoveSelectorHollow(false);
         SetupBattle();
 
+        FrostHP = 15;
+        HollowHP = 15;
+
 
         armor = 10;
         SP = 10;
@@ -463,7 +466,10 @@ public class BattleManager : MonoBehaviour
 
             yield return StartCoroutine(dialogueBox.TypeDialogue($"The Enemy Attacked"));
             yield return new WaitForSeconds(5f);
-            
+
+            --FrostHP;
+            --HollowHP;
+
         }
 
         FrostAction();

@@ -518,10 +518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '- Attack the enemy (1 dmg)
-
-
-    - Attack with Fire (2 dmg)'
+  m_Text: "- Attack the enemy \n\n- Attack with Fire "
 --- !u!222 &481943945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -926,10 +923,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '- Attack the enemy (1 dmg)
-
-
-    - Attack with Ice (2 dmg)'
+  m_Text: "- Attack the enemy \n\n- Attack with Ice "
 --- !u!222 &1017118034
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2208,6 +2202,7 @@ MonoBehaviour:
   HollowHP: {fileID: 745877758}
   dialogueText: {fileID: 2118964021}
   actionselector: {fileID: 1549404983}
+  actionselectorshop: {fileID: 0}
   moveselectorFrost: {fileID: 285352708}
   moveselectorHollow: {fileID: 1343955161}
   movedetailsFrost: {fileID: 2045394835}
