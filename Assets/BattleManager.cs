@@ -105,7 +105,7 @@ public class BattleManager : MonoBehaviour
         eneSP = 5;
         eneattck = 10;
         eneDef = 5;
-        eneHP = 100;
+        eneHP = 4;
         eneEXP = 10;
 
 
@@ -160,11 +160,10 @@ public class BattleManager : MonoBehaviour
 
         }
 
-        if (eneHP > 1)
+        if (Input.GetKeyDown(KeyCode.L))
         {
 
-            StartCoroutine(BattleEnd());
-
+            eneHP = -1;
         }
 
     }
@@ -222,7 +221,6 @@ public class BattleManager : MonoBehaviour
         dialogueBox.EnableMoveSelectorFrost(true);
         HandleMoveSelectionFrost();
 
-
     }
 
     void HandleMoveSelectionFrost()
@@ -279,7 +277,15 @@ public class BattleManager : MonoBehaviour
 
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Attacked"));
         yield return new WaitForSeconds(5f);
-        { 
+        {
+            --eneHP;
+
+            if (eneHP < 1)
+            {
+
+                enemydeath();
+
+            }
 
             HollowAction();
         }
@@ -291,7 +297,15 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Casted Ice Shard"));
         yield return new WaitForSeconds(5f);
         {
-    
+            --eneHP;
+
+            if (eneHP < 1)
+            {
+
+                enemydeath();
+
+            }
+
             HollowAction();
         }
     }
@@ -352,6 +366,15 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Hollow Attacked"));
         yield return new WaitForSeconds(5f);
         {
+            --eneHP;
+
+            if (eneHP < 1)
+            {
+
+                enemydeath();
+
+            }
+
             EnemyAction();
 
         }
@@ -363,6 +386,14 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Hollow Casted Flame Reaper"));
         yield return new WaitForSeconds(5f);
         {
+            --eneHP;
+
+            if (eneHP < 1)
+            {
+
+                enemydeath();
+
+            }
 
             EnemyAction();
 
@@ -377,6 +408,13 @@ public class BattleManager : MonoBehaviour
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelectorHollow(true);
         HandleMoveSelectionHollow();
+
+        if (eneHP < 0)
+        {
+
+            enemydeath();
+
+        }
     }
 
 
@@ -402,6 +440,13 @@ public class BattleManager : MonoBehaviour
         }
 
         FrostAction();
+
+    }
+
+    public void enemydeath()
+    {
+
+        StartCoroutine(BattleEndWin());
 
     }
 
@@ -436,15 +481,15 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public IEnumerator BattleEnd()
+    public IEnumerator BattleEndWin()
     {
-        yield return StartCoroutine(dialogueBox.TypeDialogue($"You Won!"));
-        yield return StartCoroutine(dialogueBox.TypeDialogue($"Gained 50exp and 15gp!"));
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"You Won! Gained 50exp and 15gp!"));
+        yield return new WaitForSeconds(1f);
         {
             //yield return new WaitForSeconds(1);
             SceneManager.LoadScene(0);
             State = Playerstates.Overworld;
-            EXPfinal = EXP + 43;
+            EXPfinal = EXP + 50;
             GPfinal = GP + 15;
         }
 
