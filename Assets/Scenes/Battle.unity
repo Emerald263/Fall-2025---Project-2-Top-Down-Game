@@ -192,7 +192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Attack
+  m_Text: 'Attack[_]
 
 '
 --- !u!222 &66934004
@@ -298,8 +298,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2140774386}
-  - {fileID: 1609040947}
-  - {fileID: 745877757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -520,9 +518,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Description
+  m_Text: '- Attack the enemy (1 dmg)
 
-'
+
+    - Attack with Fire (2 dmg)'
 --- !u!222 &481943945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -724,16 +723,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745877756}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 67481269}
+  m_Father: {fileID: 2140774386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100.98, y: 162.2}
+  m_AnchoredPosition: {x: 99.159004, y: 284.2}
   m_SizeDelta: {x: 76.618, y: 20.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &745877758
@@ -848,7 +847,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Attack
+  m_Text: Attack [_]
 --- !u!222 &936526514
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -927,9 +926,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Description
+  m_Text: '- Attack the enemy (1 dmg)
 
-'
+
+    - Attack with Ice (2 dmg)'
 --- !u!222 &1017118034
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1350,7 +1350,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Ice Shard
+  m_Text: 'Ice Shard [_]
 
 '
 --- !u!222 &1357199494
@@ -1507,16 +1507,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609040946}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 67481269}
+  m_Father: {fileID: 2140774386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 177.6, y: 110.2}
+  m_AnchoredPosition: {x: 175.77902, y: 232.20001}
   m_SizeDelta: {x: 76.618, y: 20.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1609040948
@@ -1751,7 +1751,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Flame Reaper
+  m_Text: Flame Reaper[_]
 --- !u!222 &1850054789
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1830,7 +1830,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Run [R]
+  m_Text: 'Run [E]
 
 '
 --- !u!222 &1961145506
@@ -2091,6 +2091,8 @@ RectTransform:
   - {fileID: 1343955162}
   - {fileID: 2045394836}
   - {fileID: 1760433366}
+  - {fileID: 1609040947}
+  - {fileID: 745877757}
   m_Father: {fileID: 67481269}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

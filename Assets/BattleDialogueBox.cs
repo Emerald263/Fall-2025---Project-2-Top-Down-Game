@@ -13,6 +13,7 @@ public class BattleDialogueBox : MonoBehaviour
     [SerializeField] Text HollowHP;
     [SerializeField] Text dialogueText;
     [SerializeField] GameObject actionselector;
+    [SerializeField] GameObject actionselectorshop;
     [SerializeField] GameObject moveselectorFrost;
     [SerializeField] GameObject moveselectorHollow;
     [SerializeField] GameObject movedetailsFrost;
@@ -53,6 +54,11 @@ public class BattleDialogueBox : MonoBehaviour
     public void EnableActionSelector(bool enabled)
     {
         actionselector.SetActive(enabled);
+    }
+
+    public void EnableActionSelectorShop(bool enabled)
+    {
+        actionselectorshop.SetActive(enabled);
     }
 
     public void EnableMoveSelectorFrost(bool enabled)
