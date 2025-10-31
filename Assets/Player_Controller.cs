@@ -227,8 +227,14 @@ public class Player_Controller : MonoBehaviour
 
         }
 
+        if (Input.GetKey("r") && (State == Playerstates.Shop1))
+        {
 
-       
+
+            State = Playerstates.Overworld;
+
+        }
+
 
     }
 

@@ -81,8 +81,9 @@ public class Shop1 : MonoBehaviour
 
             if (Shopaction == 1)
             {
+                SceneManager.LoadScene(2);
+                State = Playerstates.Overworld;
 
-                
             }
 
 
