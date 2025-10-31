@@ -7,8 +7,10 @@ public class BattleDialogueBox : MonoBehaviour
 {
     [SerializeField] int lettersPerSecond;
     [SerializeField] Color highlightedColor;
-    
 
+
+    [SerializeField] Text FrostHP;
+    [SerializeField] Text HollowHP;
     [SerializeField] Text dialogueText;
     [SerializeField] GameObject actionselector;
     [SerializeField] GameObject moveselectorFrost;
@@ -17,7 +19,8 @@ public class BattleDialogueBox : MonoBehaviour
     [SerializeField] GameObject movedetailsHollow;
 
     [SerializeField] List<Text> actionTexts;
-    [SerializeField] List<Text> moveTexts;
+    [SerializeField] List<Text> moveTextsF;
+    [SerializeField] List<Text> moveTextsH;
     [SerializeField] List<Text> moves;
 
     [SerializeField] Text descriptionF;
@@ -79,26 +82,26 @@ public class BattleDialogueBox : MonoBehaviour
 
     public void UpdateMoveSelectionFrost(int CurrentMoveFrost)
     {
-        for (int i = 0; i < moveTexts.Count; i++)
+        for (int i = 0; i < moveTextsF.Count; i++)
         {
             if (i == CurrentMoveFrost)
-                moveTexts[i].color = highlightedColor;
+                moveTextsF[i].color = highlightedColor;
 
             else
-                moveTexts[i].color = Color.black;
+                moveTextsF[i].color = Color.black;
         }
 
     }
 
     public void UpdateMoveSelectionHollow(int CurrentMoveHollow)
     {
-        for (int i = 0; i < moveTexts.Count; i++)
+        for (int i = 0; i < moveTextsH.Count; i++)
         {
             if (i == CurrentMoveHollow)
-                moveTexts[i].color = highlightedColor;
+                moveTextsH[i].color = highlightedColor;
 
             else
-                moveTexts[i].color = Color.black;
+                moveTextsH[i].color = Color.black;
         }
 
     }
@@ -109,12 +112,18 @@ public class BattleDialogueBox : MonoBehaviour
         {
 
             if (i < moves.Count)
-                moveTexts[i].text = "-";
+                moveTextsF[i].text = "-";
             else
-                moveTexts[i].text = "-";
+                moveTextsF[i].text = "-";
 
         }
 
+    }
+
+    public void FrostHPUI(float FrostHPBattle)
+    {
+
+        FrostHP.text = "";
 
     }
 }

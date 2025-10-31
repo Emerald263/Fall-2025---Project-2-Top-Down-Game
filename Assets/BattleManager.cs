@@ -18,9 +18,7 @@ public class BattleManager : MonoBehaviour
         PlayerAction,
         PlayerActionFrost,
         PlayerActionHollow,
-        EnemyMove1,
-        EnemyMove2,
-        EnemyMove3,
+        EnemyMove,
         Busy,
 
     }
@@ -113,12 +111,9 @@ public class BattleManager : MonoBehaviour
 
         armor = Level * 10;
         attack = (Level * Lvlattack) + 10;
-        SP = Level + 10;
         HP = (Level * 10) + 40;
         spell = (Level * 15) + 15;
 
-        HollowSP = 14;
-        FrostSP = 13;
 
         HollowSPfinal = HollowSP + SP;
         FrostSPfinal = FrostSP + SP;
@@ -135,13 +130,12 @@ public class BattleManager : MonoBehaviour
         HollowSpellfinal = HollowSpell + spell;
         FrostSpellfinal = FrostSpell + spell;
 
-        List<float> unsortedNumbers = new List<float> { FrostSPfinal, HollowSPfinal, eneSP };
-        List<float> sortedDescending = unsortedNumbers.OrderByDescending(x => x).ToList();
-        Debug.Log("Action Order: " + string.Join(", ", sortedDescending));
+
 
         StartCoroutine(SetupBattle());
 
     }
+
 
     // Update is called once per frame
     private void Update()
@@ -163,6 +157,13 @@ public class BattleManager : MonoBehaviour
         {
 
             HollowAction();
+
+        }
+
+        if (eneHP > 1)
+        {
+
+            StartCoroutine(BattleEnd());
 
         }
 
@@ -251,7 +252,7 @@ public class BattleManager : MonoBehaviour
                 dialogueBox.EnableDialogueText(true);
                 dialogueBox.EnableMoveSelectorFrost(false);
                 state = Battlestates.Busy;
-                FrostAttack();
+                StartCoroutine(FrostAttack());
        
 
             }
@@ -263,7 +264,7 @@ public class BattleManager : MonoBehaviour
                 dialogueBox.EnableDialogueText(true);
                 dialogueBox.EnableMoveSelectorFrost(false);
                 state = Battlestates.Busy;
-                FrostSpecial();
+                StartCoroutine(FrostSpecial());
 
             }
 
@@ -277,8 +278,9 @@ public class BattleManager : MonoBehaviour
     {
 
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Attacked"));
-        {
-            //yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
+        { 
+
             HollowAction();
         }
     }
@@ -287,8 +289,9 @@ public class BattleManager : MonoBehaviour
     {
 
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Frost Casted Ice Shard"));
+        yield return new WaitForSeconds(5f);
         {
-            //yield return new WaitForSeconds(3f);
+    
             HollowAction();
         }
     }
@@ -309,6 +312,61 @@ public class BattleManager : MonoBehaviour
 
         }
 
+        dialogueBox.UpdateMoveSelectionHollow(CurrentMoveHollow);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (CurrentMoveHollow == 0)
+            {
+                Debug.Log("Hollow Attacked");
+                dialogueBox.EnableDialogueText(true);
+                dialogueBox.EnableMoveSelectorHollow(false);
+                state = Battlestates.Busy;
+                StartCoroutine(HollowAttack());
+
+
+            }
+
+            if (CurrentMoveHollow == 1)
+            {
+
+                Debug.Log("Hollow Casted Flame Reaper");
+                dialogueBox.EnableDialogueText(true);
+                dialogueBox.EnableMoveSelectorHollow(false);
+                state = Battlestates.Busy;
+                StartCoroutine(HollowSpecial());
+
+            }
+
+
+
+        }
+
+
+    }
+
+    public IEnumerator HollowAttack()
+    {
+
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Hollow Attacked"));
+        yield return new WaitForSeconds(5f);
+        {
+            EnemyAction();
+
+        }
+    }
+
+    public IEnumerator HollowSpecial()
+    {
+
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Hollow Casted Flame Reaper"));
+        yield return new WaitForSeconds(5f);
+        {
+
+            EnemyAction();
+
+        }
     }
 
     void HollowAction()
@@ -319,6 +377,32 @@ public class BattleManager : MonoBehaviour
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelectorHollow(true);
         HandleMoveSelectionHollow();
+    }
+
+
+    void EnemyAction()
+    {
+        state = Battlestates.EnemyMove;
+        dialogueBox.EnableDialogueText(true);
+
+            StartCoroutine(EnemyAttack());
+
+        
+
+    }
+
+    public IEnumerator EnemyAttack()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+
+            yield return StartCoroutine(dialogueBox.TypeDialogue($"The Enemy Attacked"));
+            yield return new WaitForSeconds(5f);
+            
+        }
+
+        FrostAction();
+
     }
 
     
@@ -352,5 +436,20 @@ public class BattleManager : MonoBehaviour
         }
     }
 
- 
+    public IEnumerator BattleEnd()
+    {
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"You Won!"));
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Gained 50exp and 15gp!"));
+        {
+            //yield return new WaitForSeconds(1);
+            SceneManager.LoadScene(0);
+            State = Playerstates.Overworld;
+            EXPfinal = EXP + 43;
+            GPfinal = GP + 15;
+        }
+
+
+    }
+
+
 }
